@@ -144,13 +144,14 @@ async function openModal() {
   document.body.appendChild(modal);
 
   const loader = document.createElement("div");
-  loader.innerHTML = "Loading...";
+  loader.innerHTML = "Đang kiểm tra video, xin vui lòng đợi...";
   loader.style.fontSize = "20px";
   loader.style.color = "#000";
   loader.style.textAlign = "center";
   loader.style.marginTop = "20%";
 
   modalContent.appendChild(loader);
+
 
   var url = "https://api.example.com/data"; // URL API backend
   //call API
@@ -160,12 +161,12 @@ async function openModal() {
       throw new Error("Kiểm tra thất bại"); // thay bằng thông báo lỗi của api
     }
     let data = await response.json();
+    //console.log("hello");
 
     // Remove loader after data is loaded
-    modalContent.removeChild(loader);
-
-    // Remove loader after data is loaded
-    modalContent.removeChild(loader);
+    if (modalContent.contains(loader)) {
+      modalContent.removeChild(loader);
+    }
 
     // Show success message
     const successMessage = document.createElement("div");
@@ -178,8 +179,11 @@ async function openModal() {
     successMessage.style.marginTop = "20px"; // Adjust margin for better alignment
     modalContent.appendChild(successMessage);
   } catch (error) {
+    console.error("Lỗi:", error);
     // Remove loader after data is loaded or failed
-    modalContent.removeChild(loader);
+    if (modalContent.contains(loader)) {
+      modalContent.removeChild(loader);
+    }
 
     // Create and display failure message
     const errorMessage = document.createElement("div");
@@ -227,15 +231,6 @@ function runExtension() {
     downloadTiktok();
   }
 }
-
-// let lastUrl = location.href;
-// new MutationObserver(() => {
-//   const currentUrl = location.href;
-//   if (currentUrl !== lastUrl) {
-//     lastUrl = currentUrl;
-//     setTimeout(runExtension, 1000);
-//   }
-// }).observe(document, { subtree: true, childList: true });
 
 window.addEventListener("load", function () {
   //this.window.location.reload();
