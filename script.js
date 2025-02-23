@@ -140,6 +140,12 @@ async function openModal() {
   modalContent.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
   modalContent.style.height = "50%";
   modalContent.style.width = "50%";
+
+  // Đặt modalContent thành flexbox để căn giữa nội dung bên trong
+  modalContent.style.display = "flex";
+  modalContent.style.flexDirection = "column";
+  modalContent.style.alignItems = "center";
+  modalContent.style.justifyContent = "center";
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
 
@@ -148,10 +154,34 @@ async function openModal() {
   loader.style.fontSize = "20px";
   loader.style.color = "#000";
   loader.style.textAlign = "center";
-  loader.style.marginTop = "20%";
+  loader.style.marginTop = "3%";
 
+  // Tạo vòng xoay
+  const spinner = document.createElement("div");
+  spinner.style.border = "8px solid #f3f3f3"; // Màu nền
+  spinner.style.borderTop = "8px solid #3498db"; // Màu vòng xoay
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "50px";
+  spinner.style.height = "50px";
+  spinner.style.animation = "spin 1s linear infinite"; // Hiệu ứng xoay
+
+  // Áp dụng CSS cho hiệu ứng xoay
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+`;
+  document.head.appendChild(style);
+
+  // Thêm vòng xoay vào loader
+  modalContent.appendChild(spinner);
   modalContent.appendChild(loader);
-
 
   var url = "https://api.example.com/data"; // URL API backend
   //call API
@@ -164,31 +194,46 @@ async function openModal() {
     //console.log("hello");
 
     // Remove loader after data is loaded
-    if (modalContent.contains(loader)) {
+    if (modalContent.contains(loader) && modalContent.contains(spinner)) {
       modalContent.removeChild(loader);
+      modalContent.removeChild(spinner);
     }
 
     // Show success message
     const successMessage = document.createElement("div");
-    successMessage.innerHTML = `Dữ liệu tải thành công! <br> ${
+    successMessage.innerHTML = `Dữ liệu tải thành công🎆! <br> ${
       data.message || "Không có thông tin"
     }`; // thay bằng message api trả về
-    successMessage.style.fontSize = "16px";
+    successMessage.style.fontSize = "30px";
     successMessage.style.color = "green";
     successMessage.style.textAlign = "center";
-    successMessage.style.marginTop = "20px"; // Adjust margin for better alignment
+    successMessage.style.marginTop = "15px"; // Adjust margin for better alignment
     modalContent.appendChild(successMessage);
+
+    // Create tag a contain link form server
+    const linkMessage = document.createElement("a");
+    linkMessage.href = "https://www.youtube.com"; // Thay bằng link của backend
+    linkMessage.target = "_blank";
+    linkMessage.innerHTML = "Kiểm tra video ngay tại đây❤️!";
+    linkMessage.style.color = "blue";
+    linkMessage.style.textDecoration = "underline";
+    linkMessage.style.fontSize = "30px";
+    linkMessage.style.display = "block";
+    successMessage.style.marginTop = "10px";
+
+    errorMessage.appendChild(linkMessage);
   } catch (error) {
     console.error("Lỗi:", error);
     // Remove loader after data is loaded or failed
-    if (modalContent.contains(loader)) {
+    if (modalContent.contains(loader) && modalContent.contains(spinner)) {
       modalContent.removeChild(loader);
+      modalContent.removeChild(spinner);
     }
 
     // Create and display failure message
     const errorMessage = document.createElement("div");
-    errorMessage.innerHTML = "Kiểm tra thất bại, vui lòng thử lại";
-    errorMessage.style.fontSize = "16px";
+    errorMessage.innerHTML = "Kiểm tra thất bại, vui lòng thử lại🥲🥲🥲!";
+    errorMessage.style.fontSize = "30px";
     errorMessage.style.color = "red";
     errorMessage.style.textAlign = "center";
     errorMessage.style.marginTop = "20px";

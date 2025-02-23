@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Check Video Deepfake",
-  "version": "1.5.5",
+  "version": "1.5.9",
   "description": "The extension can check video deepfake into Youtube, Facebook, Tiktok platform.",
   "action": {
     "default_icon": {
