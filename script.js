@@ -221,7 +221,7 @@ async function openModal() {
     linkMessage.style.display = "block";
     successMessage.style.marginTop = "10px";
 
-    errorMessage.appendChild(linkMessage);
+    modalContent.appendChild(linkMessage);
   } catch (error) {
     console.error("Lỗi:", error);
     // Remove loader after data is loaded or failed
