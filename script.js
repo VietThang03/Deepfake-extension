@@ -120,26 +120,29 @@ function coverButton() {
 // Function to create and open the modal
 async function openModal() {
   modal = document.createElement("div");
-  modal.style.position = "fixed";
-  modal.style.top = "0";
-  modal.style.left = "0";
-  modal.style.width = "100%";
-  modal.style.height = "100%";
-  modal.style.backgroundColor = "rgba(0, 0, 0, 0.7)"; // Semi-transparent background
-  modal.style.zIndex = "9999"; // Ensure it is on top
+  //modal.style.position = "fixed";
+  //modal.style.top = "-65px"; //0
+  //modal.style.left = "0";
+  //modal.style.right = "-190px";
+  modal.style.width = "50%"; //100%
+  modal.style.height = "58%"; //100%
+  //modal.style.backgroundColor = "rgba(0, 0, 0, 0.7)"; // Semi-transparent background
+  //modal.style.zIndex = "9999"; // Ensure it is on top
 
   // Create modal content
   const modalContent = document.createElement("div");
   modalContent.style.position = "absolute";
-  modalContent.style.top = "50%";
-  modalContent.style.left = "50%";
+  modalContent.style.top = "200px"; //50%
+  //modalContent.style.left = "50%"; //50%
+  modalContent.style.right = "-200px"; //50%
   modalContent.style.transform = "translate(-50%, -50%)";
   modalContent.style.backgroundColor = "#FFFFFF";
   modalContent.style.padding = "20px";
   modalContent.style.borderRadius = "10px";
   modalContent.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-  modalContent.style.height = "50%";
-  modalContent.style.width = "50%";
+  modalContent.style.height = "250px"; //50%
+  modalContent.style.width = "450px"; //50%
+  modalContent.style.zIndex = "9999"
 
   // Đặt modalContent thành flexbox để căn giữa nội dung bên trong
   modalContent.style.display = "flex";
@@ -204,7 +207,7 @@ async function openModal() {
     successMessage.innerHTML = `Dữ liệu tải thành công🎆! <br> ${
       data.message || "Không có thông tin"
     }`; // thay bằng message api trả về
-    successMessage.style.fontSize = "30px";
+    successMessage.style.fontSize = "23px";
     successMessage.style.color = "green";
     successMessage.style.textAlign = "center";
     successMessage.style.marginTop = "15px"; // Adjust margin for better alignment
@@ -214,10 +217,10 @@ async function openModal() {
     const linkMessage = document.createElement("a");
     linkMessage.href = "https://www.youtube.com"; // Thay bằng link của backend
     linkMessage.target = "_blank";
-    linkMessage.innerHTML = "Kiểm tra video ngay tại đây❤️!";
+    linkMessage.innerHTML = "Kiểm tra chi tiết video ngay tại đây❤️!";
     linkMessage.style.color = "blue";
     linkMessage.style.textDecoration = "underline";
-    linkMessage.style.fontSize = "30px";
+    linkMessage.style.fontSize = "23px";
     linkMessage.style.display = "block";
     successMessage.style.marginTop = "10px";
 
@@ -233,10 +236,10 @@ async function openModal() {
     // Create and display failure message
     const errorMessage = document.createElement("div");
     errorMessage.innerHTML = "Kiểm tra thất bại, vui lòng thử lại🥲🥲🥲!";
-    errorMessage.style.fontSize = "30px";
+    errorMessage.style.fontSize = "23px";
     errorMessage.style.color = "red";
     errorMessage.style.textAlign = "center";
-    errorMessage.style.marginTop = "20px";
+    //errorMessage.style.marginTop = "20px";
     modalContent.appendChild(errorMessage);
   }
 
